@@ -1,11 +1,11 @@
 {
-  "name": "",
+  "name": "about-myself",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
+    "dev": "bunx --bun astro dev --verbose",
+    "start": "bun astro check --verbose && bunx --bun astro dev --watch",
+    "build": "bun astro check && bunx --bun astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -36,5 +36,17 @@
     "@iconify-json/radix-icons": "^1.1.14",
     "@iconify/vue": "^4.1.1",
     "@types/bun": "^1.0.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frikadellios/about-myself.git"
+  },
+  "author": "Hrihorii Ilin <devopsick@pm.me>",
+  "license": "Apache-2.0",
+  "description": "My page on GitHub",
+  "bugs": {
+    "url": "https://github.com/Frikadellios/about-myself/issues"
+  },
+  "homepage": "https://github.com/Frikadellios/about-myself#readme",
+  "keywords": ["vue", "astro", "react", "millionjs", "shadcn", "bun"]
 }

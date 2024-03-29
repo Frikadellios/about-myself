@@ -6,7 +6,6 @@ import million from "million/compiler";
 import svelte from "@astrojs/svelte";
 import tailwindcss from '@tailwindcss/vite';
 
-import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,8 +22,4 @@ export default defineConfig({
   integrations: [react(), vue(), tailwind({
     applyBaseStyles: false
   }), svelte()],
-  output: "server",
-  adapter: node({
-    mode: "standalone"
-  })
 });

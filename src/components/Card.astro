@@ -1,0 +1,36 @@
+---
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+
+interface Props {
+	title: string;
+	body: string;
+	href: string;
+	description: string;
+}
+
+const { href, title, body, description } = Astro.props;
+---
+
+<Card client:load>
+    <CardHeader>
+      <CardTitle>
+		{title}
+		<span>&rarr;</span>
+	</CardTitle>
+      <CardDescription>{description}</CardDescription>
+    </CardHeader>
+    <CardContent>
+		{body}
+    </CardContent>
+    <CardFooter>
+		<a href={href}> Card Footer </a>
+    </CardFooter>
+  </Card>
+

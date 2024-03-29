@@ -4,8 +4,21 @@ import vue from "@astrojs/vue";
 
 import tailwind from "@astrojs/tailwind";
 
-// https://astro.build/config
+import million from "million/compiler";
+ 
 export default defineConfig({
+  vite: {
+    plugins: [
+      million.vite({
+        mode: "react",
+        server: true,
+        auto: {
+          threshold: 0.05,
+          skip: ["useBadHook", /badVariable/g],
+        },
+      }),
+    ],
+  },
   integrations: [react(), vue(), tailwind({
     applyBaseStyles: false,
   }),]

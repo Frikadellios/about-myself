@@ -9,6 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://frikadellios.github.io',
   vite: {
     plugins: [tailwindcss(), million.vite({
       mode: "react",

@@ -19,6 +19,8 @@
     "@react-three/drei": "^9.102.6",
     "@react-three/fiber": "^8.16.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/postcss": "^4.0.0-alpha.11",
+    "@tailwindcss/vite": "^4.0.0-alpha.11",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
     "@vueuse/core": "^10.9.0",
@@ -45,6 +47,11 @@
     "@iconify-json/radix-icons": "^1.1.14",
     "@iconify/vue": "^4.1.1",
     "@types/bun": "^1.0.11"
+  },
+  "peerDependencies": {
+    "@tailwindcss/postcss": "^4.0.0-alpha.11",
+    "@tailwindcss/vite": "^4.0.0-alpha.11",
+    "tailwindcss": "^3.4.3"
   },
   "repository": {
     "type": "git",

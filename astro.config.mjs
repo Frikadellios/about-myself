@@ -4,11 +4,14 @@ import vue from "@astrojs/vue";
 import tailwind from "@astrojs/tailwind";
 import million from "million/compiler";
 import svelte from "@astrojs/svelte";
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
   vite: {
-    plugins: [million.vite({
+    plugins: [
+      tailwindcss(),
+      million.vite({
       mode: "react",
       server: true,
       auto: {

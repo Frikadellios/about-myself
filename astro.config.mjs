@@ -10,8 +10,6 @@ import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://frikadellios.github.io',
-  base: 'about-myself',
   vite: {
     plugins: [tailwindcss(), million.vite({
       mode: "react",

@@ -4,14 +4,14 @@ import vue from "@astrojs/vue";
 import tailwind from "@astrojs/tailwind";
 import million from "million/compiler";
 import svelte from "@astrojs/svelte";
-import tailwindcss from '@tailwindcss/vite';
 
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://frikadellios.github.io',
   vite: {
-    plugins: [tailwindcss(), million.vite({
+    plugins: [ 
+      million.vite({
       mode: "react",
       server: true,
       auto: {

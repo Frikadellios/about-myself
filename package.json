@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.1",
   "scripts": {
-    "dev": "bunx --bun astro dev --verbose",
+    "dev": "astro dev --verbose",
     "start": "bun astro check --verbose && bunx --bun astro dev --watch",
     "build": "bun astro check && bunx --bun astro build",
     "preview": "astro preview",
@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.5.10",
     "@astrojs/node": "^8.2.5",
     "@astrojs/react": "^3.1.0",
+    "@astrojs/sitemap": "^3.1.2",
     "@astrojs/svelte": "^5.2.0",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vue": "^4.0.9",
@@ -21,13 +22,17 @@
     "@react-three/fiber": "^8.16.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/postcss": "^4.0.0-alpha.11",
+    "@tailwindcss/typography": "^0.5.12",
     "@tailwindcss/vite": "^4.0.0-alpha.11",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "@types/three": "^0.163.0",
     "@vueuse/core": "^10.9.0",
     "astro": "^4.5.12",
+    "astro-navbar": "^2.3.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "date-fns": "^3.6.0",
     "framer-motion": "^11.0.24",
     "lucide-vue-next": "^0.363.0",
     "million": "latest",
@@ -42,6 +47,7 @@
     "three": "^0.163.0",
     "three-globe": "^2.31.0",
     "typescript": "^5.4.3",
+    "vite": "^5.2.7",
     "vue": "^3.4.21"
   },
   "devDependencies": {
@@ -65,5 +71,12 @@
     "url": "https://github.com/Frikadellios/about-myself/issues"
   },
   "homepage": "https://github.com/Frikadellios/about-myself#readme",
-  "keywords": ["vue", "astro", "react", "millionjs", "shadcn", "bun"]
+  "keywords": [
+    "vue",
+    "astro",
+    "react",
+    "millionjs",
+    "shadcn",
+    "bun"
+  ]
 }

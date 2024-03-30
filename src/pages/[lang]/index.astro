@@ -1,0 +1,27 @@
+---
+
+import Hero from "@/lib/components/ui/HeroParallax/Hero.svelte"
+import { CanvasRevealEffectDemo } from "@/components/canvas-reveal"
+import Layout from "@/layouts/Layout.astro";
+import Cta from "@/components/Cta.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import PageStart from "@/components/PageStart.astro";
+import CardsContainer from "@/components/CardsContainer.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export async function getStaticPaths() {
+  return ["en", "ru", "uk"].map((lang) => {
+    return { params: { lang } };
+  });
+}
+---
+
+<Layout title={t("site.title")} description={t("site.description")} lang={lang}>
+		<Cta />
+		<CanvasRevealEffectDemo client:load />
+		<CardsContainer client:load />
+		<PageStart title={t("site.title")} body={t("site.body")} description={t("site.description")} />
+		<Hero client:load />
+</Layout>

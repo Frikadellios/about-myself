@@ -1,0 +1,31 @@
+---
+import { Astronav, MenuItems } from "astro-navbar";
+import Navigation from '@/components/navigation.vue';
+import  ModeToggle  from '@/components/mode-toggle.vue';
+import Container from "./container.astro";
+import LangLink from "./LangLink.astro";
+
+
+interface Props {
+	title: string;
+}
+
+const { title, lang } = Astro.props;
+---
+
+<Container>
+  <Astronav>
+    <div class="flex justify-between">
+      <a>Where is Your Logo? {title}</a>
+      <ModeToggle client:load />
+    </div>
+    <div class="internal-links">
+      <LangLink language="en" isActive={lang == "en"} />
+      <LangLink language="ru" isActive={lang == "es"} />
+      <LangLink language="uk" isActive={lang == "fr"} />
+    </div>
+    <MenuItems class="hidden lg:flex">
+        <Navigation client:load />
+    </MenuItems>
+  </Astronav>
+</Container>

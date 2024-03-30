@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import  ModeToggle  from '@/components/mode-toggle.vue';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -106,6 +105,5 @@ const components: { title: string, href: string, description: string }[] = [
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>
-    <ModeToggle />
   </NavigationMenu>
 </template>

@@ -5,13 +5,26 @@ import tailwind from "@astrojs/tailwind";
 import million from "million/compiler";
 import svelte from "@astrojs/svelte";
 
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://frikadellios.github.io',
+  site: 'https://about-myself.pages.dev',
+  i18n: {
+    defaultLocale: "en",
+    fallback: {
+      ru: "en"
+    },
+    locales: ["en", "ru", {
+        path: "uk", // no slashes included
+        codes: ["uk", "uk-UA", "ru-UA"]
+    }],
+    routing: {
+        prefixDefaultLocale: true
+    }
+  },
   vite: {
-    plugins: [ 
-      million.vite({
+    plugins: [million.vite({
       mode: "react",
       server: true,
       auto: {
@@ -22,5 +35,5 @@ export default defineConfig({
   },
   integrations: [react(), vue(), tailwind({
     applyBaseStyles: false
-  }), svelte()],
+  }), svelte(), sitemap()]
 });

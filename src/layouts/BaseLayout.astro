@@ -1,0 +1,41 @@
+---
+
+import ViewTransitions from 'astro/components/ViewTransitions.astro'
+
+export interface Props {
+  title?: string | undefined
+  description?: string | undefined
+  author?: string | undefined
+  keywords?: string | undefined
+  bodyClass?: string
+}
+import ProviderAnimations from '@/components/layout/provider-animations.astro'
+import { cn } from '@/lib/utils'
+import ContainerDot from '@/components/layout/containerDot.astro'
+const { author, keywords, title, description, bodyClass } = Astro.props as Props
+---
+
+
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    {title ? <meta name="title" content={title} /> : null}
+    {description ? <meta name="description" content={description} /> : null}
+    {author ? <meta name="author" content={author} /> : null}
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
+
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <ProviderAnimations />
+    <ViewTransitions />
+
+    <title>{title}</title>
+  </head>
+  <body class={cn('flex bg-background text-foreground antialiased min-h-screen', bodyClass)}>
+      <ContainerDot />
+			<slot />
+	</body>
+</html>

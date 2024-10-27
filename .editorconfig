@@ -10,9 +10,10 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
-[*.{astro,js,jsx,ts,tsx,cjs,mjs,json,yml,yaml,xml,html,css,sass,scss,less,sh}]
+[*.{astro,js,jsx,ts,tsx,vue,cjs,mjs,json,yml,yaml,xml,html,css,sass,scss,less,sh}]
 indent_style = space
 indent_size = 2
+
 
 [*.{md,mdx}]
 indent_style = space

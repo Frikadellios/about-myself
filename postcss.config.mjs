@@ -2,7 +2,10 @@
 const config = {
   plugins: {
     autoprefixer: {},
-    '@tailwindcss/postcss': { base: './src/styles/app.css', optimize: { minify: true } },
+    'postcss-lightningcss': {
+      browsers: '>= .25%'
+    },
+    '@tailwindcss/postcss': { base: './src/styles/index.css', optimize: { minify: true } },
     '@csstools/postcss-oklab-function': { preserve: true },
     'postcss-preset-env': {
       features: { 'nesting-rules': false }

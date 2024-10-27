@@ -24,3 +24,8 @@ declare module '*.astro' {
   const Component: React.ComponentType // or use `unknown` if more appropriate
   export default Component
 }
+
+declare module '*.astro' {
+  const component: unknown
+  export default component
+}

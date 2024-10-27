@@ -1,2 +1,2 @@
-export * from "tailwindcss-animate";
+export * from 'tailwindcss-animate'
 module.exports = require('tailwindcss-animate')

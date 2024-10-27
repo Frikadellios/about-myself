@@ -1,13 +1,9 @@
 {
   "extends": "astro/tsconfigs/base",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "types": [
-        "@cloudflare/workers-types/2023-07-01",
-        "bun-types"
-      ],
+    "types": ["@cloudflare/workers-types/2023-07-01", "bun-types"],
     "strictNullChecks": true,
     "target": "ESNext",
     "module": "ESNext",
@@ -23,6 +19,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "noPropertyAccessFromIndexSignature": false,
     "jsxImportSource": "react",
     "isolatedModules": true,

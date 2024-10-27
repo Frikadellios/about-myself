@@ -1,0 +1,50 @@
+---
+// @ts-ignore
+import { services } from '@/constants/index'
+import { getLangFromUrl, useTranslations } from '@/i18n/config'
+import ServiceCard from './elements/service-card.astro'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<div class="relative mt-16 md:mt-0">
+  <div
+    class="mb-1 text-sm font-bold uppercase tracking-wider text-neon-cyan text-center"
+  >
+    <p>{t("services-subtitles")}</p>
+  </div>
+  <h3
+    class="scroll-m-20 text-xl font-semibold tracking-tight text-foreground text-center"
+  >
+    {t("services-title")}
+  </h3>
+</div>
+
+<div class="grid relative sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
+  {
+    services
+      .slice(0, 3)
+      .map((item) => (
+        <ServiceCard
+          title={item.title[lang]}
+          description={item.description[lang]}
+          image={item.image}
+          price={item.price}
+        />
+      ))
+  }
+</div>
+<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
+  {
+    services
+      .slice(3, 6)
+      .map((item) => (
+        <ServiceCard
+          title={item.title[lang]}
+          description={item.description[lang]}
+          image={item.image}
+          price={item.price}
+        />
+      ))
+  }
+</div>

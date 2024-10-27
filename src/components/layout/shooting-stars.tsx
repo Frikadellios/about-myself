@@ -106,7 +106,7 @@ export const ShootingStars: React.FC<ShootingStarsProps> = ({
     return () => cancelAnimationFrame(animationFrame)
   }, [star])
   return (
-    <svg ref={svgRef} className={cn('w-full h-full absolute inset-0', className)} aria-hidden="true">
+    <svg ref={svgRef} className={cn('absolute reletative -z-50 inset-0 h-full w-full', className)} aria-hidden="true">
       {star && (
         <rect
           key={star.id}

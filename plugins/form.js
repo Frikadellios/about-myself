@@ -1,3 +1,3 @@
-export * from "@tailwindcss/forms";
+export * from '@tailwindcss/forms'
 
-module.exports = require('@tailwindcss/forms');
+module.exports = require('@tailwindcss/forms')

@@ -1,0 +1,19 @@
+{
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "icons": [
+    {
+      "sizes": "192x192",
+      "src": "/logo-color.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "512x512",
+      "src": "/logo-color.png",
+      "type": "image/png"
+    }
+  ],
+  "name": "DevOpSick",
+  "short_name": "devopsick",
+  "theme_color": "#ffffff"
+}

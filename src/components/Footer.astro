@@ -1,0 +1,134 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import FooterLinks from '@/components/elements/footer-links.astro'
+import { type SupportedLocale, getConstants } from '@/config'
+import { getBrandName, getCurrentLocale } from '@/utils/localeUtils'
+import { Icon } from 'astro-icon/components'
+
+// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+let navData
+
+const currentLocale = getCurrentLocale(Astro.url.pathname) as SupportedLocale
+const brandName = getBrandName(currentLocale)
+const constants = getConstants(currentLocale)
+
+switch (currentLocale) {
+  case 'zh':
+    navData = await import('@/i18n/utils/zh/footernav')
+    break
+  default:
+    navData = await import('@/i18n/utils/en/footernav')
+    break
+}
+
+const { life, invest, build, more } = navData
+
+const today = new Date()
+
+const safeGetRelativeLocaleUrl = (path: string) => getRelativeLocaleUrl(currentLocale, path)
+---
+
+<footer class="mt-auto items-center w-full px-4 py-10 sm:px-6 lg:px-8">
+  <div
+    class="mb-10 grid grid-cols-2 gap-6 border-t border-neutral-200 pt-5 dark:border-neutral-700 md:grid-cols-4 lg:grid-cols-5"
+  >
+    <div class="col-span-full hidden lg:col-span-1 lg:block">
+      <a
+        class="flex-none text-xl font-semibold dark:text-white"
+        href="#"
+        aria-label="Brand">{brandName}</a
+      >
+    </div>
+    <div>
+      <h3
+        class="text-medium font-semibold uppercase text-neutral-900 dark:text-neutral-100"
+      >
+        {constants.FOOTER_LIFE}
+      </h3>
+      <div class="mt-3 grid space-y-3 text-sm">
+        {
+          life.map((item) => (
+            <FooterLinks href={safeGetRelativeLocaleUrl(item.href)}>
+              {item.text}
+            </FooterLinks>
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+      <h3
+        class="text-medium font-semibold uppercase text-neutral-900 dark:text-neutral-100"
+      >
+        {constants.FOOTER_INVEST}
+      </h3>
+      <div class="mt-3 grid space-y-3 text-sm">
+        {
+          invest.map((item) => (
+            <FooterLinks href={safeGetRelativeLocaleUrl(item.href)}>
+              {item.text}
+            </FooterLinks>
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+      <h3
+        class="text-medium font-semibold uppercase text-neutral-900 dark:text-neutral-100"
+      >
+        {constants.FOOTER_BUILD}
+      </h3>
+      <div class="mt-3 grid space-y-3 text-sm">
+        {
+          build.map((item) => (
+            <FooterLinks href={safeGetRelativeLocaleUrl(item.href)}>
+              {item.text}
+            </FooterLinks>
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+      <h3
+        class="text-medium font-semibold uppercase text-neutral-900 dark:text-neutral-100"
+      >
+        {constants.FOOTER_ABOUT}
+      </h3>
+      <div class="mt-3 grid space-y-3 text-sm">
+        {
+          more.map((item) => (
+            <FooterLinks href={safeGetRelativeLocaleUrl(item.href)}>
+              {item.text}
+            </FooterLinks>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 border-t border-neutral-200 pt-5 dark:border-neutral-700">
+    <div
+      class="flex flex-col sm:flex-row sm:flex-nowrap sm:items-center sm:justify-between"
+    >
+      <div class="flex w-full items-center justify-between">
+        <a
+          class="text-sm text-neutral-600 dark:text-neutral-400"
+          href={safeGetRelativeLocaleUrl("/")}
+          aria-label="Astroverse">{brandName} &copy; {today.getFullYear()}</a
+        >
+
+        <div class="flex items-center space-x-4 text-sm">
+          <a
+            class="inline-block text-neutral-500 hover:text-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-200"
+            href={safeGetRelativeLocaleUrl("rss.xml")}
+            aria-label="RSS"
+          >
+            <Icon name="tabler:rss" class="h-auto w-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

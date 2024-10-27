@@ -1,0 +1,124 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getEntry } from 'astro:content'
+import OptimizedCover from '@/components/OptimizedPicture.astro'
+import FormattedDate from '@/components/blog/FormattedDate.astro'
+import RelatedPostsCard from '@/components/blog/RelatedPostsCard.astro'
+import PostsSchema from '@/components/seo/PostsSchema.astro'
+import type { SupportedLocale } from '@/config'
+import { getConstants } from '@/config'
+import { LANGUAGES_ARRAY, getLangFromUrl, useTranslations } from '@/i18n/config'
+import Layout from '@/layouts/Layout.astro'
+import { getPosts } from '@/lib/posts'
+import { getCurrentLocale } from '@/utils/localeUtils'
+import { Icon } from 'astro-icon/components'
+const lang = getLangFromUrl(Astro.url)
+
+export const getStaticPaths = async () => {
+  const paths: never[] = []
+  for (const lang of LANGUAGES_ARRAY) {
+    const posts = await getPosts(lang)
+    return posts.map((post) => {
+      const [lang, slug] = post.slug.split('/')
+      return {
+        params: { lang, slug },
+        props: { post }
+      }
+    })
+  }
+  return paths
+}
+
+const { slug } = Astro.params
+const post = await getEntry('posts', `${lang}/${slug}`)
+
+if (!post) {
+  return Astro.redirect('/404')
+}
+
+type Props = CollectionEntry<'posts'>
+
+const { Content } = await post.render()
+const currentLocale: SupportedLocale = getCurrentLocale(Astro.url.pathname)
+const constants = getConstants(currentLocale)
+export const prerender = true
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.cover}
+>
+  <head>
+    <PostsSchema post={post} locale={currentLocale} />
+  </head>
+  <main>
+    <article class="prose mx-auto dark:prose-invert">
+      <div class="prose-h1 text-center">
+        <h1>{post.data.title}</h1>
+      </div>
+      <div>
+        {
+          post.data.cover && (
+            <OptimizedCover
+              src={post.data.cover}
+              alt={post.data.coverAlt || ""}
+            />
+          )
+        }
+      </div>
+      <div>
+        <Content />
+      </div>
+      <div
+        class="mx-auto flex max-w-3xl flex-col items-start justify-between sm:flex-row sm:items-center"
+      >
+        <div class="flex items-center mb-4 sm:mb-0">
+          <a href="/en/author/" aria-label="Go to homepage">
+            <img
+              class="h-16 w-16 rounded-full"
+              src="/dimi.avif"
+              alt={post.data.author || "Astroverse"}
+              loading="lazy"
+            />
+          </a>
+          <div class="ml-3">
+            <p
+              class="mb-1 text-sm font-medium text-gray-800 dark:text-neutral-500"
+            >
+              {post.data.author || "Astroverse"}
+            </p>
+            <p class="mb-1 text-sm text-gray-400 dark:text-neutral-500">
+              {constants.PUBLISHED_ON}
+              <FormattedDate date={post.data.pubDate} />
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="w-full flex justify-between items-center sm:w-auto sm:flex sm:flex-col sm:items-end"
+        >
+          <div class="mb-2 flex flex-wrap justify-start prose-a:no-underline">
+            {
+              post.data.tags.map((tag) => (
+                <span class="mb-2 mr-2 rounded-full bg-neutral-200 px-3 py-1 text-sm hover:bg-neutral-500 dark:bg-neutral-600">
+                  <a href={`/en/tags/${tag}/1/`}>{tag}</a>
+                </span>
+              ))
+            }
+          </div>
+          <div class="flex items-center text-gray-500 dark:text-gray-400">
+            <Icon name="tabler:eye" class="icon-base" />
+            <span class="waline-pageview-count ml-1"></span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <div class="mt-4">
+      <RelatedPostsCard
+        currentCategory={post.data.category[0]}
+        currentSlug={post.slug}
+      />
+    </div>
+  </main>
+</Layout>

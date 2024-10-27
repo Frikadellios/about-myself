@@ -1,0 +1,193 @@
+---
+import { Image } from 'astro:assets'
+import astro from '@/assets/icons/astro.svg'
+import bun from '@/assets/icons/bun.svg'
+import preact from '@/assets/icons/preact.svg'
+import react from '@/assets/icons/react.svg'
+import solid from '@/assets/icons/solid.svg'
+import svelte from '@/assets/icons/svelte.svg'
+import swc from '@/assets/icons/swc.svg'
+import vite from '@/assets/icons/vite.svg'
+import vue from '@/assets/icons/vue.svg'
+
+import { getLangFromUrl, useTranslations } from '@/i18n/config'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<section>
+  <h1>{t("skills-bundlers")}</h1>
+  <p class="imgs">
+    <a class="vite" href="https://vitejs.dev">
+      <Image src={vite} alt="vite logo" width="58" height="58" />
+    </a>
+    <a class="bun" href="https://bun.sh">
+      <Image src={bun} alt="bun logo" width="60" height="60" />
+    </a>
+    <a class="swc" href="https://swc.rs">
+      <Image src={swc} alt="rollup logo" width="58" height="58" />
+    </a>
+  </p>
+  <h1 class="framework">{t("skills-frameworks")}</h1>
+  <p class="imgs">
+    <a class="svelte" href="https://svelte.dev">
+      <Image src={svelte} alt="svelte" width="50" height="50" />
+    </a>
+    <a class="vue" href="https://vuejs.org">
+      <Image src={vue} alt="vue" width="44" height="44" />
+    </a>
+    <a class="solid" href="https://solidjs.com">
+      <Image src={solid} alt="solid" width="48" height="48" />
+    </a>
+    <a class="preact" href="https://preactjs.com">
+      <Image src={preact} alt="preact" width="50" height="50" />
+    </a>
+    <a class="react" href="https://reactjs.org">
+      <Image src={react} alt="react" width="50" height="50" />
+    </a>
+    <a class="astro" class="astro" href="https://astro.build">
+      <Image src={astro} alt="astro" width="50" height="50" />
+    </a>
+  </p>
+</section>
+
+<style>
+  section {
+    position: relative;
+    padding: 4rem 0 4.3rem;
+    background-color: trancperent;
+    padding: 3rem 0;
+  }
+
+  section::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    pointer-events: none;
+    background-color: trancperent;
+    -webkit-mask-image: url(../assets/svg/background.svg);
+    mask-image: url(../assets/svg/background.svg);
+    -webkit-mask-position: 0 top;
+    mask-position: 0 top;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+  }
+
+  h1 {
+    text-align: center;
+    color: var(--primary);
+  }
+
+  .explainer {
+    text-align: center;
+    font-size: 0.95rem;
+    margin: 1rem 0 2rem;
+    opacity: 0.8;
+    line-height: 1.8;
+  }
+
+  .explainer > span {
+    color: var(--primary);
+  }
+
+  .imgs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 260px;
+  }
+
+  .tbd {
+    position: relative;
+  }
+
+  .tbd > img {
+    opacity: 0.2;
+  }
+
+  .tbd::after {
+    position: absolute;
+    content: "TBD";
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary);
+    color: var(--dark);
+    font-size: 0.8em;
+    font-weight: 600;
+    padding: 0.1rem 0.2rem;
+    border-radius: 0.25rem;
+  }
+
+  .framework {
+    margin-top: 5.5rem;
+  }
+
+  .astro {
+    transform: translateX(-4px) translateY(3px);
+  }
+
+  a {
+    /* Safari clips the filter shadow if not */
+    will-change: filter;
+    transition: filter 0.15s ease-out;
+  }
+
+  a:hover {
+    animation: shake3856 0.3s linear infinite both;
+  }
+
+  .vite:hover,
+  .vite:focus {
+    filter: drop-shadow(0 0 1em #646cffaa);
+  }
+  .bun:hover,
+  .bun:focus {
+    filter: drop-shadow(0 0 1em #8ed6fb88);
+  }
+  .swc:hover,
+  .swc:focus {
+    filter: drop-shadow(0 0 1em #efc10088);
+  }
+  .svelte:hover,
+  .svelte:focus {
+    filter: drop-shadow(0 0 1em #ff3e00aa);
+  }
+  .vue:hover,
+  .vue:focus {
+    filter: drop-shadow(0 0 1em #42b883aa);
+  }
+  .solid:hover,
+  .solid:focus {
+    filter: drop-shadow(0 0 1em #4f88c6aa);
+  }
+  .preact:hover,
+  .preact:focus {
+    filter: drop-shadow(0 0 1em #673ab7aa);
+  }
+  .react:hover,
+  .react:focus {
+    filter: drop-shadow(0 0 1em #61dafbaa);
+  }
+  .astro:hover,
+  .astro:focus {
+    filter: drop-shadow(0 0 1em #ffffffaa);
+  }
+
+  @media (min-width: 768px) {
+    .explainer {
+      font-size: 1.1rem;
+    }
+
+    .imgs {
+      max-width: none;
+    }
+  }
+</style>

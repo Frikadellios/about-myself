@@ -12,7 +12,8 @@
   "search.exclude": {
     "pnpm-lock.yaml": true,
     "**/node_modules/*": true,
-    "tmp/*": true
+    "tmp/*": true,
+    "bun.lockb": true
   },
   // autosave with formatting on save
   "files.autoSave": "afterDelay",
@@ -54,6 +55,7 @@
     "source.organizeImports.biome": "explicit"
   },
   "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     "editor.fontSize": 14,
     "editor.lineHeight": 26,
     "editor.wordWrap": "wordWrapColumn",

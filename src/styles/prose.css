@@ -1,4 +1,3 @@
-
 :where(.prose) {
   :where(h1, h2, h3, h4, p, figure, blockquote, dl, dd, ul, ol) {
     margin-top: 1em;

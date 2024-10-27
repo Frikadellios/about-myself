@@ -1,41 +1,46 @@
 ---
-
 import ViewTransitions from 'astro/components/ViewTransitions.astro'
-
+import '@/styles/index.css'
 export interface Props {
-  title?: string | undefined
-  description?: string | undefined
+  title: string
+  description: string
+  lang?: string | undefined
+  image?: string | undefined
   author?: string | undefined
   keywords?: string | undefined
+  copyright?: string | undefined
   bodyClass?: string
 }
+import ContainerDot from '@/components/layout/containerDot.astro'
 import ProviderAnimations from '@/components/layout/provider-animations.astro'
 import { cn } from '@/lib/utils'
-import ContainerDot from '@/components/layout/containerDot.astro'
-const { author, keywords, title, description, bodyClass } = Astro.props as Props
+const { author, keywords, title, copyright, description, image, bodyClass } = Astro.props as Props
+
+import BaseHead from '@/components/BaseHead.astro'
+import { getCurrentLocale } from '@/utils/localeUtils'
+const lang = getCurrentLocale(Astro.url.pathname)
 ---
 
-
-
-<html lang="en" dir="ltr">
+<html lang={lang} dir="ltr" class="bg-trancperent scroll-smooth">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-
-    {title ? <meta name="title" content={title} /> : null}
-    {description ? <meta name="description" content={description} /> : null}
-    {author ? <meta name="author" content={author} /> : null}
-    {keywords ? <meta name="keywords" content={keywords} /> : null}
-
-    <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <BaseHead title={title} description={description} image={image} />
     <ProviderAnimations />
     <ViewTransitions />
-
-    <title>{title}</title>
+    {title ? <meta name="title" content={title} /> : null}
+    {description ? <meta name="description" content={description} /> : null}
+    {copyright ? <meta name="copyright" content={copyright} /> : null}
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
+    {author ? <meta name="author" content={author} /> : null}
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
   </head>
-  <body class={cn('flex bg-background text-foreground antialiased min-h-screen', bodyClass)}>
-      <ContainerDot />
-			<slot />
-	</body>
+  <body
+    class={cn(
+      "flex flex-col  page antialiased min-h-screen",
+      bodyClass,
+    )}
+  >
+    <ContainerDot />
+    <slot />
+  </body>
 </html>

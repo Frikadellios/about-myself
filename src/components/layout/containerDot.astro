@@ -5,8 +5,13 @@ import { StarsBackground } from './stars-background'
 const { class: className } = Astro.props
 ---
 
-<div class:list={['h-auto w-auto rounded-tl-3xl rounded-tr-3xl -z-10 bg-trancperent', className]}>
-    <ShootingStars client:visible />
-    <StarsBackground client:visible />
-    <slot />
+<div
+  class:list={[
+    "h-auto w-auto w-full h-hull rounded-tl-3xl rounded-tr-3xl -z-10 bg-trancperent",
+    className,
+  ]}
+>
+  <ShootingStars client:visible />
+  <StarsBackground client:visible />
+  <slot />
 </div>

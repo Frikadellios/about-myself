@@ -1,0 +1,251 @@
+---
+import { ViewTransitions } from 'astro:transitions'
+import GlobalSchema from '@/components/seo/GlobalSchema.astro'
+import MetaSEO from '@/components/seo/MetaSEO.astro'
+import type { SupportedLocale } from '@/config'
+import { getBrandName, getCurrentLocale } from '@/utils/localeUtils'
+
+interface Props {
+  title: string
+  description: string
+  image?: string
+  canonical?: string
+  noindex?: boolean
+  nofollow?: boolean
+  charset?: string
+  languageAlternates?: Array<{ href: string; hrefLang: string }>
+}
+
+const {
+  title,
+  description,
+  image,
+  canonical,
+  noindex = false,
+  nofollow = false,
+  charset = 'UTF-8',
+  languageAlternates = []
+} = Astro.props
+
+const currentLocale: SupportedLocale = getCurrentLocale(Astro.url.pathname)
+const brandName = getBrandName(currentLocale)
+
+const formattedTitle = title.includes(brandName) ? title : `${title} | ${brandName}`
+
+const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toString()
+
+function getAlternateLocaleUrl(targetLocale: string): string {
+  const pathParts = Astro.url.pathname.split('/').filter(Boolean)
+  if (pathParts[0] === currentLocale) {
+    pathParts[0] = targetLocale
+  } else if (pathParts[0] === 'posts' && pathParts.length >= 3) {
+    pathParts[1] = targetLocale
+  } else {
+    pathParts.unshift(targetLocale)
+  }
+  return new URL(`/${pathParts.join('/')}`, Astro.site).toString()
+}
+
+const supportedLocales: string[] = [
+  'zh',
+  'en',
+  'ja',
+  'ko',
+  'pt',
+  'de',
+  'id',
+  'hi',
+  'fr',
+  'es',
+  'ru',
+  'ar',
+  'de',
+  'pl',
+  'uk'
+]
+
+const alternateUrls: Record<string, string> = supportedLocales.reduce((acc: Record<string, string>, locale: string) => {
+  acc[locale] = getAlternateLocaleUrl(locale)
+  return acc
+}, {})
+
+const localeAlternateMap: Record<string, string> = {
+  zh: 'zh_CN',
+  en: 'en_US',
+  ru: 'ru_UA',
+  uk: 'uk_UA',
+  fr: 'fr_FR',
+  de: 'de_DE',
+  es: 'es_ES',
+  pl: 'pl_PL'
+}
+
+const localeAlternate: string[] = supportedLocales.map((locale: string) => localeAlternateMap[locale])
+
+const defaultImage = new URL('/og.webp', Astro.site).toString()
+---
+
+<meta charset={charset} />
+
+<GlobalSchema />
+
+<MetaSEO
+  title={formattedTitle}
+  description={description}
+  canonical={canonicalURL}
+  noindex={noindex}
+  nofollow={nofollow}
+  charset={charset}
+  languageAlternates={[
+    ...languageAlternates,
+    ...supportedLocales.map((locale) => ({
+      href: alternateUrls[locale],
+      hrefLang: locale,
+    })),
+  ]}
+  openGraph={{
+    basic: {
+      title: formattedTitle,
+      type: "website",
+      image: image ? new URL(image, Astro.site).toString() : defaultImage,
+      url: canonicalURL,
+    },
+    optional: {
+      siteName: brandName,
+      locale: localeAlternateMap[currentLocale] || currentLocale,
+      description: description,
+    },
+  }}
+  twitter={{
+    card: "summary_large_image",
+    site: "@devopsick",
+    creator: "@devopsick",
+    title: formattedTitle,
+    description: description,
+    image: image ? new URL(image, Astro.site).toString() : defaultImage,
+    imageAlt: `${brandName} - ${title}`,
+  }}
+  extend={{
+    link: [
+      { rel: "icon", href: "/favicon.ico" },
+      { rel: "sitemap", href: "/sitemap-index.xml" },
+      ...languageAlternates.map(({ href, hrefLang }) => ({
+        rel: "alternate",
+        href,
+        hreflang: hrefLang,
+      })),
+    ],
+    meta: [
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "generator", content: Astro.generator },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: canonicalURL },
+      { property: "og:title", content: formattedTitle },
+      { property: "og:description", content: description },
+      {
+        property: "og:image",
+        content: image ? new URL(image, Astro.site).href : defaultImage,
+      },
+      { property: "twitter:card", content: "summary_large_image" },
+      { property: "twitter:url", content: canonicalURL },
+      { property: "twitter:title", content: formattedTitle },
+      { property: "twitter:description", content: description },
+      {
+        property: "twitter:image",
+        content: image ? new URL(image, Astro.site).href : defaultImage,
+      },
+    ],
+  }}
+  currentLocale={localeAlternateMap[currentLocale] || currentLocale}
+  localeAlternate={localeAlternate}
+  defaultImage={defaultImage}
+/>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.jpg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={brandName}
+  href={new URL("rss.xml", Astro.site)}
+/>
+
+<!-- Global Metadata -->
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+<meta name="generator" content={Astro.generator} />
+
+
+<link
+  rel="preload"
+  href="/fonts/inter.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<!-- Font preloads -->
+<link
+  rel="preload"
+  href="./src/assets/fonts/inter.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Sitemap -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow" />
+
+<script
+  is:inline
+  defer
+  src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"
+></script>
+
+<!-- Global Scripts -->
+<script is:inline src="/js/theme.js"></script>
+<script is:inline src="/js/scroll.js"></script>
+<script is:inline src="/js/animate.js"></script>
+
+<script>
+  import { animate } from "motion";
+  const showAnimations = localStorage.getItem("animations") === "true";
+
+  if (showAnimations) {
+    animate(
+      ".title",
+      { y: [80, 0], opacity: [0, 1] },
+      {
+        duration: 2.5,
+        opacity: { duration: 3 },
+
+        offset: [0, 0.55, 0.75],
+      },
+    );
+  }
+</script>
+
+<!-- <ViewTransitions  /> -->
+
+<script>
+  import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
+  document.addEventListener("astro:before-swap", (e) =>
+    [
+      ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
+        'link[as="font"]',
+      ),
+    ].forEach((link) => link.remove()),
+  );
+</script>
+
+<ViewTransitions />

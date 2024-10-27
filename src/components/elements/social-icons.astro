@@ -1,0 +1,16 @@
+---
+interface Props {
+  href: string
+  Icon: React.ComponentType<{ className?: string }>
+  children: React.ReactNode
+}
+
+const { href, Icon, children } = Astro.props
+---
+
+<a href={href} target="_blank" rel="noreferrer" class="group">
+  <span class="sr-only">{children}</span>
+  <Icon
+    className="h-5 w-5 fill-muted-foreground transition group-hover:fill-neon-cyan"
+  />
+</a>

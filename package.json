@@ -55,7 +55,8 @@
     "lint:fix": "bunx @biomejs/biome check . --fix",
     "lint:check": "bunx @biomejs/biome check ./* --write --unsafe",
     "ui": "bunx shadcn-ui@latest",
-    "sharp": "bun scripts/sharp.ts"
+    "sharp": "bun scripts/sharp.ts",
+    "translate:auto": "bunx @inlang/cli machine translate --project project.inlang"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -117,6 +118,7 @@
     "dayjs": "^1.11.13",
     "embla-carousel-react": "^8.3.0",
     "framer-motion": "^11.11.10",
+    "i18next-browser-languagedetector": "^8.0.0",
     "lucide-react": "^0.453.0",
     "mdast-util-to-string": "^4.0.0",
     "motion": "^10.18.0",
@@ -128,6 +130,7 @@
     "react-day-picker": "8.10.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.1",
+    "react-i18next": "^15.1.0",
     "reading-time": "^1.5.0",
     "rehype-external-links": "^3.0.0",
     "schema-dts": "^1.1.2",
@@ -153,6 +156,7 @@
     "@types/web": "^0.0.167",
     "@vitejs/plugin-legacy": "^5.4.3",
     "bun-devtools": "latest",
+    "bun-plugin-dts": "^0.3.0",
     "bun-types": "latest",
     "detect-browser-es": "^0.1.1",
     "editorconfig-checker": "^6.0.0",
@@ -166,7 +170,8 @@
     "wrangler": "^3.83.0"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "i18next": "^23.16.4"
   },
   "resolutions": {
     "cheerio": "1.0.0-rc.12"

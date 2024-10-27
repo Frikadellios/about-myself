@@ -8,6 +8,7 @@
     "unifiedjs.vscode-mdx",
     "bradlc.vscode-tailwindcss",
     "johnsoncodehk.volarjs-labs",
-    "csstools.postcss"
+    "csstools.postcss",
+    "inlang.vs-code-extension"
   ]
 }

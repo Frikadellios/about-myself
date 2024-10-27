@@ -92,7 +92,7 @@ export default defineConfig({
       defaultExportByFilename: false,
       include: [/\.[tj]sx?$/, /\.md$/],
       packagePresets: ['detect-browser-es'],
-      imports: ['react', 'react-router', 'react-i18next', 'react-router-dom'],
+      imports: ['react', 'react-router', 'react-i18next'],
       viteOptimizeDeps: true,
       injectAtEnd: true,
       dirs: ['./src/utils/*.ts', './src/hooks'],

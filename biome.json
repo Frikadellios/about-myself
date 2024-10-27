@@ -18,7 +18,7 @@
     "lineEnding": "lf",
     "lineWidth": 120,
     "attributePosition": "auto",
-    "ignore": ["node_modules/**", "dist/**", "worker-configuration.d.ts"]
+    "ignore": ["node_modules/**", "dist/**", "src/types/auto-imports.d.ts", "worker-configuration.d.ts"]
   },
   "organizeImports": {
     "enabled": true
@@ -82,7 +82,17 @@
       }
     },
     { "include": ["*.svg"] },
-    { "include": ["*.astro"] },
+    {
+      "include": ["*.astro"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off"
+          }
+        }
+      }
+    },
 
     {
       "include": [".*", "*.json", "*.md", "*.toml", "*.yml"],

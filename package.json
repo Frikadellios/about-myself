@@ -56,7 +56,8 @@
     "lint:check": "bunx @biomejs/biome check ./* --write --unsafe",
     "ui": "bunx shadcn-ui@latest",
     "sharp": "bun scripts/sharp.ts",
-    "translate:auto": "bunx @inlang/cli machine translate --project project.inlang"
+    "translate:auto": "bunx @inlang/cli machine translate --project project.inlang",
+    "translate:build": "bunx @inlang/cli machine translate -f --project project.inlang --targetLanguageTags fr,es,ru,uk,zh,de,pl,en"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
